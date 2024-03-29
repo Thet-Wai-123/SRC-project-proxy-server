@@ -31,9 +31,12 @@ app.get(
     const googleApiURL =
       "https://maps.googleapis.com/maps/api/js?key=" + process.env.googleAPIKEY;
     const response = await fetch(googleApiURL);
-    // const responseJSON = await response.json();
-    // console.log(responseJSON);
-    res.send(response);
+    const responseText = await response.text();
+    res.set({
+      "Content-Type": "text/javascript",
+    });
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.send(responseText);
   })
 );
 
